@@ -1,0 +1,67 @@
+/*Helpers*/
+
+.icon--fixed-xxs svg {
+    width: 15px !important;
+    height: 15px !important;
+}
+
+.icon--fixed-xs svg {
+    width: 20px !important;
+    height: 20px !important;
+}
+
+.icon--fixed-xsm svg {
+    width: 25px !important;
+    height: 25px !important;
+}
+
+.icon--fixed-sm svg {
+    width: 30px !important;
+    height: 30px !important;
+}
+
+.icon--fixed svg {
+    width: 40px !important;
+    height: 40px !important;
+}
+
+.icon--fixed-md svg {
+    width: 50px !important;
+    height: 50px !important;
+}
+
+.icon--fixed-lg svg {
+    width: 60px !important;
+    height: 60px !important;
+}
+
+.icon--fixed-xl svg {
+    width: 80px !important;
+    height: 80px !important;
+}
+
+.icon--fixed-xxl svg {
+    width: 130px !important;
+    height: 130px !important;
+}
+
+
+
+/*.icon--fixed-md-xs svg {*/
+/*@include media-breakpoint-up(md) {*/
+/*    width: rem(20) !important;*/
+/*    height: rem(20) !important;*/
+/*}*/
+/*}*/
+
+/*.icon--fixed-md-xsm svg {*/
+/*@include media-breakpoint-up(md) {*/
+/*    width: rem(25) !important;*/
+/*    height: rem(25) !important;*/
+/*}*/
+/*}*/
+
+/*.icon-padding {*/
+/*    padding-left: rem(5);*/
+/*    padding-right: 0!important; !* surcharge *!*/
+/*}*/

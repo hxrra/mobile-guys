@@ -1,0 +1,7 @@
+{
+  "name": "mobile-guys",
+  "version": "1.0.0",
+  "devDependencies": {
+    "sass": "^1.35.2"
+  }
+}
