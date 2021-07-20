@@ -6,7 +6,9 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Entity\Product;
+use App\Entity\Promo;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -18,7 +20,12 @@ class PageController extends AbstractController
      */
     public function home(): Response
     {
-        return $this->render('home.html.twig');
+        $categoryRepository = $this->getDoctrine()->getRepository(Promo::class);
+
+        $promoList = $categoryRepository->findAll();
+        return $this->render('home.html.twig', [
+            'promoList' => $promoList
+        ]);
     }
 
     /**
