@@ -18,7 +18,7 @@ class Promo
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=product::class, inversedBy="promos")
+     * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="promos")
      */
     private $product;
 
