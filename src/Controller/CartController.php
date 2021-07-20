@@ -20,14 +20,72 @@ class CartController extends AbstractController
     }
 
     /**
-     * @Route("product/{id}/add", name="cart_add")
+     * @Route("/cart", name="cart_show")
+     * @param Request $request
+     * @return Response
+     */
+    public function showCart(Request $request): Response
+    {
+        $session = $request->getSession();
+        $cart = $session->get('panier');
+        foreach ($cart as &$item) {
+            $repository = $this->getDoctrine()->getRepository(Product::class);
+            $productFind = $repository->find($item['id']);
+
+            $item['product'] = $productFind;
+        }
+
+
+        return $this->render('cart.html.twig', [
+            'cart' => $cart
+        ]);
+    }
+
+    /**
+     * @Route("product/delete/{id}", name="cart_delete")
      * @param int $id
      * @param Request $request
      * @return Response
      */
-    public function add(int $id, Request $request): Response {
-        $repository = $this->getDoctrine()->getRepository(Product::class);
-        $product = $repository->find($id);
+    public function delete(int $id, Request $request) {
+        $session = $request->getSession();
+        $cart = $session->get('panier');
+
+        $lengthBefore = count($cart);
+        unset($cart[$id]);
+        $lengthAfter = count($cart);
+
+        $session->set('panier', $cart);
+
+        if($lengthAfter < $lengthBefore) {
+            $this->addFlash('warning', 'Impossible de supprimer l\'article');
+        }
+        $this->redirectToRoute('cart_show');
+    }
+
+    /**
+     * @Route("/cart/trash", name="cart_crash")
+     * @param Request $request
+     */
+    public function deleteAll(Request $request) {
+        $session = $request->getSession();
+        $session->set('panier', []);
+
+        $this->redirectToRoute('cart_show');
+    }
+
+    /**
+     * @Route("product/{id}/add/{quantite}", name="cart_add")
+     * @param int $id
+     * @param int $quantite
+     * @param Request $request
+     * @return Response
+     */
+    public function add(int $id, int $quantite,Request $request) {
+        if($this->verifProduct($id, $request) == null) {
+            $this->addFlash('warning', 'impossible d\'ajouter le produit au panier');
+            return $this->render('base.html.twig');
+        }
 
         $session = $request->getSession();
 
@@ -36,17 +94,30 @@ class CartController extends AbstractController
         }
         $cart = $session->get('panier');
 
-        array_push($cart, $id);
+        array_push($cart, array(
+            'id' => $id,
+            'quantite' => $quantite
+        ));
 
         $session->set('panier', $cart);
 
-        return $this->render('base.html.twig');
+        $this->redirectToRoute('cart_show');
     }
 
     public function createCart(Request $request) {
         $session = $request->getSession();
         $session->set('panier', array());
         return null;
+    }
+
+    public function verifProduct(int $id, Request $request) {
+        $repository = $this->getDoctrine()->getRepository(Product::class);
+        $product = $repository->find($id);
+
+        if($product->getDesignation() == null) {
+            return null;
+        }
+        return 1;
     }
 
 }
