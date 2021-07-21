@@ -1,19 +1,29 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
 <h2>Affichage du panier</h2>
     <table>
         <tr>
             <th>Nom</th>
             <th>Quantité</th>
             <th>Prix</th>
+            <th>Action</th>
         </tr>
-        {% for product in cart %}
+        {% for index,product in cart %}
+            {{ dump(product) }}
         <tr>
             <td>{{ product.product.designation }}</td>
             <td>{{ product.quantite }}</td>
             <td>{{ product.product.price }}</td>
+            <td><a href="{{ path('cart_delete', {'id' : index}) }}">Supprimer</a> </td>
         </tr>
         {% endfor %}
+
+        <a href="{{ path('cart_trash') }}">Vider le panier</a>
     </table>
 {% endblock %}

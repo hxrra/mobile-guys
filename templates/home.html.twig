@@ -30,5 +30,10 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-
+    <!-- Pour les infos, voir dans la base de données les noms !-->
+    {% for item in promoList %}
+        {{ item.product.designation }}
+        {{ item.product.price }}
+        {{ item.product.category.title }}
+    {% endfor %}
 {% endblock %}

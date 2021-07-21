@@ -23,6 +23,7 @@ class PageController extends AbstractController
         $categoryRepository = $this->getDoctrine()->getRepository(Promo::class);
 
         $promoList = $categoryRepository->findAll();
+
         return $this->render('home.html.twig', [
             'promoList' => $promoList
         ]);
@@ -42,7 +43,7 @@ class PageController extends AbstractController
 
         $products = $productRepository->findBy(['category' => $category->getId()]);
 
-        return $this->render('category_show.html.twig', [
+        return $this->render('category/category_show.html.twig', [
             'title' => $category->getTitle(),
             'products' => $products,
         ]);
