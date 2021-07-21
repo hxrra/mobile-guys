@@ -8,6 +8,7 @@ use App\Entity\Category;
 use App\Entity\News;
 use App\Entity\Product;
 use App\Entity\Promo;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,9 +39,11 @@ class PageController extends AbstractController
     /**
      * @Route("category/{slug}", name="category_show")
      * @param string $slug
+     * @param PaginatorInterface $paginator
+     * @param Request $request
      * @return Response
      */
-    public function categoryShow(string $slug): Response
+    public function categoryShow(string $slug, PaginatorInterface $paginator, Request $request): Response
     {
         $productRepository = $this->getDoctrine()->getRepository(Product::class);
         $categoryRepository = $this->getDoctrine()->getRepository(Category::class);
@@ -49,9 +52,15 @@ class PageController extends AbstractController
 
         $products = $productRepository->findBy(['category' => $category->getId()]);
 
+        $articles = $paginator->paginate(
+            $products, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            9 // Nombre de résultats par page
+        );
+
         return $this->render('category/category_show.html.twig', [
             'title' => $category->getTitle(),
-            'products' => $products,
+            'products' => $articles,
         ]);
     }
 
