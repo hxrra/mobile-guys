@@ -41,8 +41,13 @@ class CartController extends AbstractController
             $item['product'] = $productFind;
         }
 
+        $emptyCart = 0;
+        if(empty($cart)) {
+            $emptyCart = 1;
+        }
 
         return $this->render('cart.html.twig', [
+            'emptyCart' => $emptyCart,
             'cart' => $cart
         ]);
     }
