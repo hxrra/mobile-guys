@@ -2606,6 +2606,8 @@ p {
 
 .card-tall {
   width: 90%;
+  height: 850px;
+  overflow: auto;
   border-radius: 10px;
   margin-bottom: 30px;
   margin: auto;
