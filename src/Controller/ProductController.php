@@ -21,8 +21,14 @@ class ProductController extends AbstractController
 
         $product = $productRepository->findOneBy(['slug' => $slug]);
 
+        $nextProduct = $productRepository->findBy(['category' => $product->getCategory()->getId()], null, 3, $product->getId());
+
+
         return $this->render('product/index.html.twig', [
             'product' => $product,
+            'nextProduct' => $nextProduct
         ]);
     }
+
+
 }
