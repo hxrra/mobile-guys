@@ -12,13 +12,13 @@
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="img/adomas-aleno-4vrZpOo7fTc-unsplash.jpg" class="d-block w-100" alt="...">
+                <img src="img/adomas-aleno-4vrZpOo7fTc-unsplash-ht300pxbanniere.png" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="img/adomas-aleno-gQuiE815FMc-unsplash1.jpg" class="d-block w-100" alt="...">
+                <img src="img/adomas-aleno-gQuiE815FMc-unsplash_1-300px.jpeg" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="img/adomas-aleno-PIa0zTlIFOw-unsplash.jpg" class="d-block w-100" alt="...">
+                <img src="img/adomas-aleno-PIa0zTlIFOw-unsplash-300px.jpeg" class="d-block w-100" alt="...">
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -38,12 +38,37 @@
             <hr class="H2_underline">
         </div>
 
-        <div class="flex">
+        <div class="row d-flex flex-wrap justify-content-around justify-content-lg-between card-list">
+
+           <!-- Pour les infos, voir dans la base de données les noms !-->
+           {% for item in promoList %}
+                <div class="col-12 col-lg-4 card">
+                    <img class="p-x-15 p-y-15" src="img/{{ item.product.image }}" alt="">
+                    <p>{{ item.product.designation }}</p>
+                    <p>350.99€</p>
+                    <p>{{ item.product.category.title }}</p>
+                    <p>{{ item.product.description|length > 50 ? item.product.description|slice(0, 50) ~ '...' : item.product.description  }}</p>
+                </div>
+           {% endfor %}
+        </div>
+
+        <div class="p-t-15 p-b-15">
+            <h2>Nos nouveautés</h2>
+            <hr class="H2_underline">
+        </div>
+
+
+        <div class="row d-flex flex-wrap justify-content-around justify-content-lg-between card-list">
             <!-- Pour les infos, voir dans la base de données les noms !-->
-            {% for item in promoList %}
-                {{ item.product.designation }}
-                {{ item.product.price }}
-                {{ item.product.category.title }}
+            {% for item in newsList %}
+                <div class="col-12 col-lg-4 card">
+                    <img class="p-x-15 p-y-15" src="img/{{ item.product.image }}" alt="">
+                    <p>{{ item.product.designation }}</p>
+                    <p>{{ item.product.price }}</p>
+                    <p>{{ item.product.category.title }}</p>
+                    <p>{{ item.product.description|length > 50 ? item.product.description|slice(0, 50) ~ '...' : item.product.description  }}
+                    </p>
+                </div>
             {% endfor %}
         </div>
     </section>
