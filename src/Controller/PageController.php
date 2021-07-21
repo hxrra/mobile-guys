@@ -5,6 +5,7 @@ namespace App\Controller;
 
 
 use App\Entity\Category;
+use App\Entity\News;
 use App\Entity\Product;
 use App\Entity\Promo;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,8 +25,13 @@ class PageController extends AbstractController
 
         $promoList = $categoryRepository->findAll();
 
+        $newsRepository = $this->getDoctrine()->getRepository(News::class);
+
+        $newsList = $newsRepository->findAll();
+
         return $this->render('home.html.twig', [
-            'promoList' => $promoList
+            'promoList' => $promoList,
+            'newsList' => $newsList
         ]);
     }
 
