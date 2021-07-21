@@ -4,7 +4,13 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
-
+h1 {
+  font-family: "Secular One";
+  font-size: 40px;
+  color: #4C2529;
+  text-transform: uppercase;
+  padding: 10px;
+}
 
 
 h2 {
@@ -42,3 +48,8 @@ p{
   margin-bottom: 0;
 }
 
+.link-guy {
+  font-family: "Roboto Light";
+  color: #4C2529;
+  text-decoration: none;
+}

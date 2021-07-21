@@ -13,10 +13,12 @@
 }
 
 .card {
- width: 90%;
+ width: 95%;
  border-radius: 10px;
   margin-bottom: 30px;
  box-shadow: 4px 4px 7px 0px rgba(0,0,0,0.25);
+  padding-top: 15px;
+  padding-bottom: 30px;
 
   .promo-list_price {
     align-self: center;

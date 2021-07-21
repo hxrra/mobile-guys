@@ -42,19 +42,20 @@
 
            <!-- Pour les infos, voir dans la base de données les noms !-->
            {% for item in promoList %}
-                <div class="col-12 col-lg-4 card">
-                    <img class="p-x-15 p-y-15" src="img/{{ item.product.image }}" alt="">
-                    <div class="d-flex flex-wrap promo-list">
-                        <div class="col-8">
-                            <p class="title">{{ item.product.designation }}</p>
-                            <p class="subtitle">{{ item.product.category.title }}</p>
-                            <p>{{ item.product.description|length > 50 ? item.product.description|slice(0, 50) ~ '...' : item.product.description  }}</p>
-                        </div>
-                        <div class="col-4 promo-list_price">
-                            <p>{{ item.product.price }} <span>€</span></p>
-                        </div>
-                    </div>
-                </div>
+               <div class="col-12 col-lg-4 card">
+                   <img class="p-x-15 p-y-15" src="img/{{ item.product.image }}" alt="">
+                   <div class="d-flex flex-wrap promo-list">
+                       <div class="col-10">
+                           <p class="title">{{ item.product.designation }}</p>
+                           <p class="subtitle">{{ item.product.category.title }}</p>
+                           <p>{{ item.product.description|length > 40 ? item.product.description|slice(0, 40) ~ '...' : item.product.description  }}</p>
+                       </div>
+                       <div class="col-2 promo-list_price">
+                           <p>{{ item.product.price }} <span>€</span></p>
+                       </div>
+                   </div>
+                   <button class="btn btn-guys">Ajouter au panier</button>
+               </div>
            {% endfor %}
         </div>
 
@@ -64,20 +65,23 @@
         </div>
 
 
-        <div class="row d-flex flex-wrap justify-content-around justify-content-lg-between card-list">
+        <div class="d-flex flex-wrap justify-content-around justify-content-lg-between card-list">
             <!-- Pour les infos, voir dans la base de données les noms !-->
             {% for item in newsList %}
                 <div class="col-12 col-lg-4 card">
                     <img class="p-x-15 p-y-15" src="img/{{ item.product.image }}" alt="">
-                    <p>{{ item.product.designation }}</p>
-                    <p>{{ item.product.price }} <span>€</span></p>
-                    <p>{{ item.product.category.title }}</p>
-                    <p>{{ item.product.description|length > 50 ? item.product.description|slice(0, 50) ~ '...' : item.product.description  }}
-                    </p>
-
-                    <button class="add_cart"> Ajouter au panier</button>
+                    <div class="d-flex flex-wrap promo-list">
+                        <div class="col-8">
+                            <p class="title">{{ item.product.designation }}</p>
+                            <p class="subtitle">{{ item.product.category.title }}</p>
+                            <p>{{ item.product.description|length > 40 ? item.product.description|slice(0, 40) ~ '...' : item.product.description  }}</p>
+                        </div>
+                        <div class="col-4 promo-list_price">
+                            <p>{{ item.product.price }} <span>€</span></p>
+                        </div>
+                    </div>
+                    <button class="btn btn-guys">Ajouter au panier</button>
                 </div>
-
             {% endfor %}
         </div>
     </section>
