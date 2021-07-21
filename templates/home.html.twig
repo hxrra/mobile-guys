@@ -38,16 +38,22 @@
             <hr class="H2_underline">
         </div>
 
-        <div class="row d-flex flex-wrap justify-content-around justify-content-lg-between card-list">
+        <div class="d-flex flex-wrap justify-content-around justify-content-lg-between card-list">
 
            <!-- Pour les infos, voir dans la base de données les noms !-->
            {% for item in promoList %}
                 <div class="col-12 col-lg-4 card">
                     <img class="p-x-15 p-y-15" src="img/{{ item.product.image }}" alt="">
-                    <p>{{ item.product.designation }}</p>
-                    <p>350.99€</p>
-                    <p>{{ item.product.category.title }}</p>
-                    <p>{{ item.product.description|length > 50 ? item.product.description|slice(0, 50) ~ '...' : item.product.description  }}</p>
+                    <div class="d-flex flex-wrap promo-list">
+                        <div class="col-8">
+                            <p class="title">{{ item.product.designation }}</p>
+                            <p class="subtitle">{{ item.product.category.title }}</p>
+                            <p>{{ item.product.description|length > 50 ? item.product.description|slice(0, 50) ~ '...' : item.product.description  }}</p>
+                        </div>
+                        <div class="col-4 promo-list_price">
+                            <p>{{ item.product.price }} <span>€</span></p>
+                        </div>
+                    </div>
                 </div>
            {% endfor %}
         </div>
@@ -64,11 +70,14 @@
                 <div class="col-12 col-lg-4 card">
                     <img class="p-x-15 p-y-15" src="img/{{ item.product.image }}" alt="">
                     <p>{{ item.product.designation }}</p>
-                    <p>{{ item.product.price }}</p>
+                    <p>{{ item.product.price }} <span>€</span></p>
                     <p>{{ item.product.category.title }}</p>
                     <p>{{ item.product.description|length > 50 ? item.product.description|slice(0, 50) ~ '...' : item.product.description  }}
                     </p>
+
+                    <button class="add_cart"> Ajouter au panier</button>
                 </div>
+
             {% endfor %}
         </div>
     </section>

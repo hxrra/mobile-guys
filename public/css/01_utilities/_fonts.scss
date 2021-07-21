@@ -17,8 +17,8 @@ h2 {
 
 .H2_underline {
   //surcharge bootstrap
-  opacity: 100%!important;
-  height: 5px!important;
+  opacity: 100% !important;
+  height: 5px !important;
   width: 35%;
   color: #4C2529;
   margin-right: 0;
@@ -26,3 +26,19 @@ h2 {
   margin-bottom: 0;
   margin-left: 10px;
 }
+
+.title {
+  font-family: "Secular One";
+  font-size: 16px;
+  text-transform: uppercase;
+  color: #4C2529;
+}
+
+.subtitle {
+  color: #4C2529;
+}
+
+p{
+  margin-bottom: 0;
+}
+
