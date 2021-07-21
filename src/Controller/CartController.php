@@ -47,7 +47,7 @@ class CartController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function delete(int $id, Request $request) {
+    public function delete(int $id, Request $request): Response {
         $session = $request->getSession();
         $cart = $session->get('panier');
 
@@ -60,18 +60,18 @@ class CartController extends AbstractController
         if($lengthAfter < $lengthBefore) {
             $this->addFlash('warning', 'Impossible de supprimer l\'article');
         }
-        $this->redirectToRoute('cart_show');
+        return $this->redirectToRoute('cart_show');
     }
 
     /**
-     * @Route("/cart/trash", name="cart_crash")
+     * @Route("/cart/trash", name="cart_trash")
      * @param Request $request
      */
-    public function deleteAll(Request $request) {
+    public function deleteAll(Request $request): Response {
         $session = $request->getSession();
         $session->set('panier', []);
 
-        $this->redirectToRoute('cart_show');
+        return $this->redirectToRoute('cart_show');
     }
 
     /**
@@ -81,7 +81,7 @@ class CartController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function add(int $id, int $quantite,Request $request) {
+    public function add(int $id, int $quantite,Request $request): Response {
         if($this->verifProduct($id, $request) == null) {
             $this->addFlash('warning', 'impossible d\'ajouter le produit au panier');
             return $this->render('base.html.twig');
@@ -101,7 +101,7 @@ class CartController extends AbstractController
 
         $session->set('panier', $cart);
 
-        $this->redirectToRoute('cart_show');
+        return $this->redirectToRoute('cart_show');
     }
 
     public function createCart(Request $request) {

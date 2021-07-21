@@ -21,7 +21,6 @@
                 <img src="img/adomas-aleno-PIa0zTlIFOw-unsplash.jpg" class="d-block w-100" alt="...">
             </div>
         </div>
-
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
@@ -30,6 +29,7 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
+    </div>
     </section>
 
     <section class="container-fluid">
@@ -39,10 +39,12 @@
         </div>
 
         <div class="flex">
-{#            {% for product in promoList %}#}
-{#            <div class="card home_cards">#}
-{#            </div>#}
-{#            {% endfor %}#}
+            <!-- Pour les infos, voir dans la base de données les noms !-->
+            {% for item in promoList %}
+                {{ item.product.designation }}
+                {{ item.product.price }}
+                {{ item.product.category.title }}
+            {% endfor %}
         </div>
     </section>
 {% endblock %}
