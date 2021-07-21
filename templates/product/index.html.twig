@@ -1,20 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProductController!{% endblock %}
-
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/teddy/Desktop/Travail/École/CESI/1 Année/ProjetWebSymfony/mobile-guys/src/Controller/ProductController.php'|file_link(0) }}">src/Controller/ProductController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/teddy/Desktop/Travail/École/CESI/1 Année/ProjetWebSymfony/mobile-guys/templates/product/index.html.twig'|file_link(0) }}">templates/product/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <tr>
+        <td><img src="/img/{{ product.image }}" alt="{{ product.designation }}"></td>
+        <br>
+        <td>{{ product.designation }}</td>
+        <br>
+        <td>{{ product.price }} €</td>
+        <br>
+        <td>{{ product.description }}</td>
+        <br>
+        <td>{{ product.content|raw }}</td>
+        <br>
+        <td>
+            {% if product.stock == 0 %}
+                <p>Out of stock :(</p>
+            {% else %}
+                <form method="post" action="{{ path('cart_add', {'id' : product.id, 'quantite': 1}) }}">
+                    <input type="number" value="1" id="how" name="how" min="1" max="30">
+                    <button type="submit">Ajouter au panier</button>
+                </form>
+            {% endif %}
+        </td>
+    </tr>
 {% endblock %}

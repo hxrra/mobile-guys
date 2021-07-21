@@ -2,19 +2,27 @@
 
 namespace App\Controller;
 
+use App\Entity\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ProductController extends AbstractController
 {
     /**
-     * @Route("/product", name="product")
+     * @Route("/product/{slug}", name="product_show")
+     * @param string $slug
+     * @return Response
      */
-    public function index(): Response
+    public function index(string $slug): Response
     {
+        $productRepository = $this->getDoctrine()->getRepository(Product::class);
+
+        $product = $productRepository->findOneBy(['slug' => $slug]);
+
         return $this->render('product/index.html.twig', [
-            'controller_name' => 'ProductController',
+            'product' => $product,
         ]);
     }
 }

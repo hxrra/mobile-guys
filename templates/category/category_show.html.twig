@@ -13,7 +13,7 @@
         </tr>
         {% for product in products %}
             <tr>
-                <td>{{ product.designation }}</td>
+                <td><a href="{{ path('product_show', {'slug': product.slug}) }}">{{ product.designation }}</a> </td>
                 <td><img src="/img/{{ product.image }}" alt="{{ product.designation }}"></td>
                 <td>{{ product.price }} €</td>
                 <td>
@@ -28,5 +28,6 @@
                 </td>
             </tr>
         {% endfor %}
+        {{ knp_pagination_render(products) }}
     </table>
 {% endblock %}
