@@ -4,7 +4,9 @@
 namespace App\Controller;
 
 
+use App\Entity\Order;
 use App\Entity\Product;
+use App\Form\Type\ValidateCart;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -136,6 +138,47 @@ class CartController extends AbstractController
             return null;
         }
         return 1;
+    }
+
+    /**
+     * @Route("/cart/validation", name="cart_validation")
+     * @param Request $request
+     * @return Response
+     */
+    public function cartValidator(Request $request): Response
+    {
+        // récup panier
+        $session = $request->getSession();
+        $cart = $session->get('panier');
+
+        if(empty($cart)) {
+            return $this->render('cart.html.twig', [
+                'emptyCart' => 1
+            ]);
+        }
+
+        // demander info
+        $order = new Order();
+
+        $form = $this->createForm(ValidateCart::class, $order);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($order);
+            $em->flush();
+
+            return $this->redirectToRoute("public_home");
+        }
+
+
+        // valider info
+        // Envoi BDD + gestion du stock
+
+        // Envoi d'un email de validation ?
+
+        return $this->render('order/order.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
 }
