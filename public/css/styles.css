@@ -2608,6 +2608,8 @@ p {
   width: 90%;
   border-radius: 10px;
   margin-bottom: 30px;
+  margin: auto;
+  padding: 15px;
   box-shadow: 4px 4px 7px 0px rgba(0, 0, 0, 0.25);
 }
 
