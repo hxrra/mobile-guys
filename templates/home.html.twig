@@ -53,7 +53,7 @@
                            <p>{{ item.product.description|length > 40 ? item.product.description|slice(0, 40) ~ '...' : item.product.description  }}</p>
                        </div>
                        <div class="col-2 promo-list_price">
-                           <p>{{ item.product.price }} <span>€</span></p>
+                           <p>{{ item.product.price |format_currency('EUR') }}</p>
                        </div>
                    </div>
                    <button class="btn btn-guys">Ajouter au panier</button>
@@ -79,7 +79,7 @@
                             <p>{{ item.product.description|length > 40 ? item.product.description|slice(0, 40) ~ '...' : item.product.description  }}</p>
                         </div>
                         <div class="col-4 promo-list_price">
-                            <p>{{ item.product.price }} <span>€</span></p>
+                            <p>{{ item.product.price |format_currency('EUR') }} </p>
                         </div>
                     </div>
                     <button class="btn btn-guys">Ajouter au panier</button>

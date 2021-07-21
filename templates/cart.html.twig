@@ -23,7 +23,7 @@
             <tr>
                 <td>{{ product.product.designation }}</td>
                 <td>{{ product.quantite }}</td>
-                <td>{{ product.product.price }}</td>
+                <td>{{ product.product.price |format_currency('EUR') }}</td>
                 <td><a href="{{ path('cart_delete', {'id' : index}) }}">Supprimer</a> </td>
             </tr>
             {% endfor %}

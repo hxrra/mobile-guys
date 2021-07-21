@@ -21,7 +21,7 @@
                                 <p>{{ product.description|length > 40 ? product.description|slice(0, 40) ~ '...' : product.description  }}</p>
                             </div>
                             <div class="col-4 promo-list_price">
-                                <p>{{ product.price }} <span>€</span></p>
+                                <p>{{ product.price |format_currency('EUR') }} </p>
                             </div>
                             {% if product.stock == 0 %}
                                 <div class="col-12">

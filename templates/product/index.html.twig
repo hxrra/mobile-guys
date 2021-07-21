@@ -11,8 +11,7 @@
             <h2>{{ product.designation }}</h2>
             <hr class="H2_underline">
 
-            <div class="special_price m-t-15 m-b-15">{{ product.price }}
-                <span>€</span>
+            <div class="special_price m-t-15 m-b-15">{{ product.price |format_currency('EUR') }}
             </div>
 
             <div class="">{{ product.description }}</div>
@@ -39,7 +38,7 @@
 
     <div class="container">
         <div class="p-t-15 p-b-15">
-            <h2>Les promos de la semaine</h2>
+            <h2>Découvrir nos autres produits</h2>
             <hr class="H2_underline">
         </div>
 
@@ -58,7 +57,7 @@
                                         <p>{{ product.description|length > 40 ? product.description|slice(0, 40) ~ '...' : product.description  }}</p>
                                     </div>
                                     <div class="col-2 promo-list_price">
-                                        <p>{{ product.price }} <span>€</span></p>
+                                        <p>{{ product.price|format_currency('EUR') }}</p>
                                     </div>
                                 </div>
                                 <button class="btn btn-guys">Ajouter au panier</button>

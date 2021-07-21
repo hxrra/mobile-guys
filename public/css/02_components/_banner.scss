@@ -1,0 +1,45 @@
+.banner_1 {
+  height: 250px;
+  background-image: url("/img");
+}
+
+.banner_2 {
+  height: 250px;
+}
+
+.banner_3 {
+  height: 250px;
+}
+
+.banner_4 {
+  height: 250px;
+}
+
+.banner_5 {
+  height: 250px;
+}
+
+
+@media (min-width: 768px) {
+  .banner_1 {
+    height: 300px;
+  }
+
+  .banner_2 {
+    height: 300px;
+  }
+
+  .banner_3 {
+    height: 300px;
+  }
+
+  .banner_4 {
+    height: 300px;
+  }
+
+  .banner_5 {
+    height: 300px;
+  }
+
+}
+
