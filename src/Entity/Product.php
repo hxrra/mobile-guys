@@ -74,9 +74,15 @@ class Product
      */
     private $promos;
 
+    /**
+     * @ORM\OneToMany(targetEntity=News::class, mappedBy="product")
+     */
+    private $news;
+
     public function __construct()
     {
         $this->promos = new ArrayCollection();
+        $this->news = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -228,6 +234,36 @@ class Product
             // set the owning side to null (unless already changed)
             if ($promo->getProduct() === $this) {
                 $promo->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|News[]
+     */
+    public function getNews(): Collection
+    {
+        return $this->news;
+    }
+
+    public function addNews(News $news): self
+    {
+        if (!$this->news->contains($news)) {
+            $this->news[] = $news;
+            $news->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNews(News $news): self
+    {
+        if ($this->news->removeElement($news)) {
+            // set the owning side to null (unless already changed)
+            if ($news->getProduct() === $this) {
+                $news->setProduct(null);
             }
         }
 
