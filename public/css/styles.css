@@ -64,6 +64,25 @@
 /*    padding-right: 0!important; !* surcharge *!*/
 /*}*/
 /*Fonts*/
+h2 {
+  font-family: "Secular One";
+  font-size: 24px;
+  color: #4C2529;
+  text-transform: uppercase;
+  padding: 10px;
+}
+
+.H2_underline {
+  opacity: 100% !important;
+  height: 5px !important;
+  width: 35%;
+  color: #4C2529;
+  margin-right: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 10px;
+}
+
 /*Colors*/
 /*
  * Useful classes for margins & paddings, taking account media queries.
@@ -2560,6 +2579,9 @@
   .nav-link_icon {
     padding-left: 50px;
   }
+}
+.carousel-inner {
+  height: 300px;
 }
 
 /*# sourceMappingURL=styles.css.map */

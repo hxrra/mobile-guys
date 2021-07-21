@@ -3,3 +3,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Secular+One&display=swap');
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+
+
+
+h2 {
+  font-family: "Secular One";
+  font-size: 24px;
+  color: #4C2529;
+  text-transform: uppercase;
+  padding: 10px;
+}
+
+.H2_underline {
+  //surcharge bootstrap
+  opacity: 100%!important;
+  height: 5px!important;
+  width: 35%;
+  color: #4C2529;
+  margin-right: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 10px;
+}

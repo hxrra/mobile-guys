@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <section id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -21,6 +21,7 @@
                 <img src="img/adomas-aleno-PIa0zTlIFOw-unsplash.jpg" class="d-block w-100" alt="...">
             </div>
         </div>
+
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
@@ -29,6 +30,19 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
-    </div>
+    </section>
 
+    <section class="container-fluid">
+        <div class="p-t-15 p-b-15">
+            <h2>Les promos de la semaine</h2>
+            <hr class="H2_underline">
+        </div>
+
+        <div class="flex">
+{#            {% for product in promoList %}#}
+{#            <div class="card home_cards">#}
+{#            </div>#}
+{#            {% endfor %}#}
+        </div>
+    </section>
 {% endblock %}
