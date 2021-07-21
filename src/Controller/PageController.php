@@ -82,6 +82,10 @@ class PageController extends AbstractController
         return $this->render('terms-of-use.html.twig');
     }
 
+    /**
+     * @Route("/legal-notice", name="legalNotice")
+     * @return Response
+     */
     public function legalNotice(): Response
     {
         return $this->render('legal-notice.html.twig');
