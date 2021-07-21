@@ -2,19 +2,19 @@
 
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img class="navbar-brand_img" src="/img/logo.svg"></a>
+        <a class="navbar-brand" href="{{ path('home') }}"><img class="navbar-brand_img" src="/img/logo.svg"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-evenly" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link nav-link_text align-self-center p-r-lg-20 p-l-lg-20" href="#">Nos smartphones</a>
-                <a class="nav-link nav-link_text align-self-center " href="#">Nos accessoires</a>
-                <a class="nav-link nav-link_text align-self-center" href="#">Qui sommes-nous ?</a>
+                <a class="nav-link nav-link_text align-self-center p-r-lg-20 p-l-lg-20" href="{{ path('category_show', {'slug' : 'smartphones'}) }}">Nos smartphones</a>
+                <a class="nav-link nav-link_text align-self-center " href="{{ path('category_show', {'slug' : 'accessoires'}) }}">Nos accessoires</a>
+                <a class="nav-link nav-link_text align-self-center" href="{{ path('aboutUs') }}">Qui sommes-nous ?</a>
                 <div class="d-flex justify-content-center justify-content-md-right nav-link_icon">
-                    <a class="nav-link align-self-center p-r-10 p-l-10" href="#"><img src="img/icon/ic_panier.png"></a>
-                    <a class="nav-link align-self-center p-r-10 p-l-10" href="#"><img src="img/icon/ic_accessibility.png"></a>
-                    <a class="nav-link align-self-center p-r-10 p-l-10" href="#"><img src="img/icon/ic_account.png"></a>
+                    <a class="nav-link align-self-center p-r-10 p-l-10" href="{{ path('cart_show') }}"><img src="/img/icon/ic_panier.png"></a>
+                    <a class="nav-link align-self-center p-r-10 p-l-10" href="#"><img src="/img/icon/ic_accessibility.png"></a>
+                    <a class="nav-link align-self-center p-r-10 p-l-10" href="#"><img src="/img/icon/ic_account.png"></a>
                 </div>
 
             </div>
