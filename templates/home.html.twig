@@ -43,7 +43,7 @@
            <!-- Pour les infos, voir dans la base de données les noms !-->
            {% for item in promoList %}
                <div class="col-12 col-lg-4 card">
-                   <img class="p-x-15 p-y-15" src="img/{{ item.product.image }}" alt="">
+                   <img class="p-x-15 p-y-15" src="img/{{ item.product.image }}" alt="photo d'un smartphone {{ item.product.designation }}">
                    <div class="d-flex flex-wrap promo-list">
                        <div class="col-12">
                            <a class="title" href="{{ path('product_show', {'slug': item.product.slug}) }}">{{ item.product.designation }}</a>
@@ -71,7 +71,7 @@
             <!-- Pour les infos, voir dans la base de données les noms !-->
             {% for item in newsList %}
                 <div class="col-12 col-lg-4 card">
-                    <img class="p-x-15 p-y-15" src="img/{{ item.product.image }}" alt="">
+                    <img class="p-x-15 p-y-15" src="img/{{ item.product.image }}" alt="photo d'un smartphone {{ item.product.designation }}">
                     <div class="d-flex flex-wrap promo-list">
                         <div class="col-8">
                             <p class="title">{{ item.product.designation }}</p>
