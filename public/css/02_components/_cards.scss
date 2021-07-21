@@ -25,6 +25,22 @@
     text-align: center;
   }
 }
+
+.card-product {
+  width: 90%;
+  border-radius: 10px;
+  margin: auto;
+  padding: 15px;
+  background-color: white;
+  border: 1px solid rgba(0,0,0,.125);
+  box-shadow: 4px 4px 7px 0px rgba(0,0,0,0.25);
+
+}
+
+.card-product_img {
+  max-width: 100%;
+}
+
 @media (min-width: 768px) and (max-width: 1200px){
   .card {
     width: 300px;

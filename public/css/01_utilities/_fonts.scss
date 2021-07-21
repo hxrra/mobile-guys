@@ -33,6 +33,13 @@ h2 {
   margin-left: 10px;
 }
 
+p{
+  font-size: 12px;
+  margin-bottom: 0;
+}
+
+// TEXTES SPÉCIFIQUES
+
 .title {
   font-family: "Secular One";
   font-size: 16px;
@@ -46,11 +53,6 @@ h2 {
   color: #4C2529;
 }
 
-p{
-  font-size: 12px;
-  margin-bottom: 0;
-}
-
 .link-guy {
   font-family: "Roboto Light";
   color: #4C2529;
@@ -60,4 +62,11 @@ p{
 .out_text {
   font-size: 14px;
   color: #C36033;
+}
+
+.special_price {
+  font-family: "Secular One";
+  font-size: 50px;
+  text-align: center;
+  color: #4C2529;
 }
