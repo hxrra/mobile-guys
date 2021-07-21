@@ -95,14 +95,17 @@ h2 {
   font-family: "Secular One";
   font-size: 16px;
   text-transform: uppercase;
+  text-decoration: none;
   color: #4C2529;
 }
 
 .subtitle {
+  font-size: 14px;
   color: #4C2529;
 }
 
 p {
+  font-size: 12px;
   margin-bottom: 0;
 }
 
@@ -110,6 +113,11 @@ p {
   font-family: "Roboto Light";
   color: #4C2529;
   text-decoration: none;
+}
+
+.out_text {
+  font-size: 14px;
+  color: #C36033;
 }
 
 /*Colors*/
@@ -2661,11 +2669,17 @@ p {
 .btn-guys {
   width: 90%;
   font-family: "Secular One";
+  font-size: 14px;
   text-align: center;
+  text-transform: uppercase;
   color: white;
   background-color: #4C2529;
   border-radius: 0;
   margin: 0 auto;
+}
+.btn-guys:hover {
+  color: white;
+  background-color: #C36033;
 }
 
 body {
@@ -2689,6 +2703,13 @@ footer {
 
 .footer-link {
   padding: 10px 100px;
+}
+
+.cercle {
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #C36033;
 }
 
 /*# sourceMappingURL=styles.css.map */

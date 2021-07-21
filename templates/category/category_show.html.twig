@@ -2,32 +2,44 @@
 
 
 {% block body %}
-<h2>{{ title }}</h2>
+    <section class="container">
+        <div class="p-t-15 p-b-15">
+            <h2>{{ title }}</h2>
+            <hr class="H2_underline">
+        </div>
 
-    <table>
-        <tr>
-            <th>Nom</th>
-            <th>Image</th>
-            <th>Prix</th>
-            <th>Action</th>
-        </tr>
-        {% for product in products %}
-            <tr>
-                <td><a href="{{ path('product_show', {'slug': product.slug}) }}">{{ product.designation }}</a> </td>
-                <td><img src="/img/{{ product.image }}" alt="{{ product.designation }}"></td>
-                <td>{{ product.price }} €</td>
-                <td>
-                    {% if product.stock == 0 %}
-                        <p>Out of stock :(</p>
-                    {% else %}
-                        <form method="post" action="{{ path('cart_add', {'id' : product.id, 'quantite': 1}) }}">
-                            <input type="number" value="1" id="how" name="how" min="1" max="30">
-                            <button type="submit">Ajouter au panier</button>
-                        </form>
-                    {% endif %}
-                </td>
-            </tr>
-        {% endfor %}
-        {{ knp_pagination_render(products) }}
-    </table>
+        <div class="d-flex flex-wrap justify-content-around justify-content-lg-between card-list">
+            {% for product in products %}
+                    <div class="col-12 col-lg-4 card">
+                        <img class="p-x-15 p-y-15" src="/img/{{ product.image }}" alt="{{ product.designation }}">
+                        <div class="d-flex flex-wrap promo-list">
+                            <div class="col-12">
+                                <a class="title" href="{{ path('product_show', {'slug': product.slug}) }}">{{ product.designation }}</a>
+                            </div>
+                            <div class="col-8">
+                                <p class="subtitle">{{ product.category.title }}</p>
+                                <p>{{ product.description|length > 40 ? product.description|slice(0, 40) ~ '...' : product.description  }}</p>
+                            </div>
+                            <div class="col-4 promo-list_price">
+                                <p>{{ product.price }} <span>€</span></p>
+                            </div>
+                            {% if product.stock == 0 %}
+                                <div class="col-12">
+                                    <p class="m-t-15 text-center out_text">
+                                        <span><img src="img/icon/ic_circle.png" alt=""></span>
+                                        Out of stock :(</p></div>
+                            {% else %}
+                                <form class="d-flex m-t-15" method="post" action="{{ path('cart_add', {'id' : product.id, 'quantite': 1}) }}">
+                                    <input class="col-3 m-r-5 text-center" type="number" value="1" id="how" name="how" min="1" max="30">
+                                    <button class="btn btn-guys w-100 col-9" type="submit" class="btn btn-guys">Ajouter au panier</input>
+                                </form>
+                            {% endif %}
+                        </div>
+
+             </div>
+            {% endfor %}
+        </div>
+
+            {{ knp_pagination_render(products) }}
+    </section>
 {% endblock %}

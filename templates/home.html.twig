@@ -12,7 +12,7 @@
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="img/adomas-aleno-4vrZpOo7fTc-unsplash-ht300pxbanniere.png" class="d-block w-100" alt="...">
+                <img src="img/banner_1.jpg" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
                 <img src="img/adomas-aleno-gQuiE815FMc-unsplash_1-300px.jpeg" class="d-block w-100" alt="...">
@@ -45,8 +45,10 @@
                <div class="col-12 col-lg-4 card">
                    <img class="p-x-15 p-y-15" src="img/{{ item.product.image }}" alt="">
                    <div class="d-flex flex-wrap promo-list">
+                       <div class="col-12">
+                           <a class="title" href="{{ path('product_show', {'slug': item.product.slug}) }}">{{ item.product.designation }}</a>
+                       </div>
                        <div class="col-10">
-                           <p class="title">{{ item.product.designation }}</p>
                            <p class="subtitle">{{ item.product.category.title }}</p>
                            <p>{{ item.product.description|length > 40 ? item.product.description|slice(0, 40) ~ '...' : item.product.description  }}</p>
                        </div>

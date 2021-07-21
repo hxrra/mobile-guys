@@ -37,14 +37,17 @@ h2 {
   font-family: "Secular One";
   font-size: 16px;
   text-transform: uppercase;
+  text-decoration: none;
   color: #4C2529;
 }
 
 .subtitle {
+  font-size: 14px;
   color: #4C2529;
 }
 
 p{
+  font-size: 12px;
   margin-bottom: 0;
 }
 
@@ -52,4 +55,9 @@ p{
   font-family: "Roboto Light";
   color: #4C2529;
   text-decoration: none;
+}
+
+.out_text {
+  font-size: 14px;
+  color: #C36033;
 }
