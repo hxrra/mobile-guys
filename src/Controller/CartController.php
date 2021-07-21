@@ -28,6 +28,12 @@ class CartController extends AbstractController
     {
         $session = $request->getSession();
         $cart = $session->get('panier');
+
+        if($cart == null) {
+            $this->createCart($request);
+            $cart = $session->get('panier');
+        }
+
         foreach ($cart as &$item) {
             $repository = $this->getDoctrine()->getRepository(Product::class);
             $productFind = $repository->find($item['id']);
@@ -35,8 +41,13 @@ class CartController extends AbstractController
             $item['product'] = $productFind;
         }
 
+        $emptyCart = 0;
+        if(empty($cart)) {
+            $emptyCart = 1;
+        }
 
         return $this->render('cart.html.twig', [
+            'emptyCart' => $emptyCart,
             'cart' => $cart
         ]);
     }
@@ -82,6 +93,13 @@ class CartController extends AbstractController
      * @return Response
      */
     public function add(int $id, int $quantite,Request $request): Response {
+
+        $how = $request->request->get('how');
+
+        if($how != null) {
+            $quantite = $how;
+        }
+
         if($this->verifProduct($id, $request) == null) {
             $this->addFlash('warning', 'impossible d\'ajouter le produit au panier');
             return $this->render('base.html.twig');
