@@ -2851,5 +2851,8 @@ footer {
     min-height: 40vh;
   }
 }
+.aboutus_img {
+  max-width: 100%;
+}
 
 /*# sourceMappingURL=styles.css.map */
