@@ -1,5 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    {% for message in app.flashes('warning') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
 {{ form(form) }}
 {% endblock %}

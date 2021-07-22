@@ -15,7 +15,7 @@
             {{ message }}
         </div>
     {% endfor %}
-
+    
     <section class="container-fluid">
         <h2>Affichage du panier</h2>
 
@@ -38,7 +38,7 @@
                         <td><a href="{{ path('cart_delete', {'id' : index}) }}">Supprimer</a> </td>
                     </tr>
                     {% endfor %}
-
+                    
             <p>Total : {{ total }}</p>
 
             <a href="{{ path('cart_trash') }}">Vider le panier</a>
