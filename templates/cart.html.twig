@@ -9,6 +9,7 @@
     </section>
     {% for message in app.flashes('warning') %}
         <div class="alert alert-danger">
+        {{ message }}
     {% endfor %}
 
     {% for message in app.flashes('success') %}

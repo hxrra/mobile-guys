@@ -6,18 +6,27 @@ namespace App\Controller;
 
 use App\Entity\Order;
 use App\Entity\Product;
+use App\Entity\User;
 use App\Form\Type\ValidateCart;
+use App\Form\Type\ValidateCartConnected;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CartController extends AbstractController
 {
 
-    public function __construct(RequestStack $requestStack)
+    /**
+     * @var UserPasswordHasherInterface
+     */
+    private $passwordEncoder;
+
+    public function __construct(RequestStack $requestStack, UserPasswordHasherInterface $passwordEncoder)
     {
+        $this->passwordEncoder = $passwordEncoder;
         $this->requestStack = $requestStack;
     }
 
@@ -172,13 +181,22 @@ class CartController extends AbstractController
 
     }
 
+    public function getProduct(int $id) {
+        $repository = $this->getDoctrine()->getRepository(Product::class);
+
+        return $repository->find($id);
+    }
+
     /**
      * @Route("/cart/validation", name="cart_validation")
      * @param Request $request
+     * @param \Swift_Mailer $mailer
      * @return Response
      */
-    public function cartValidator(Request $request): Response
+    public function cartValidator(Request $request, \Swift_Mailer $mailer): Response
     {
+        $repository = $this->getDoctrine()->getRepository(User::class);
+
         $alert = 0;
         // récup panier
         $session = $request->getSession();
@@ -193,7 +211,21 @@ class CartController extends AbstractController
         // demander info
         $order = new Order();
 
-        $form = $this->createForm(ValidateCart::class, $order);
+        if( $securityContext = $this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED') ) {
+            $order->setPrenom($this->getUser()->getPrenom());
+            $order->setNom($this->getUser()->getNom());
+            $order->setTel($this->getUser()->getTel());
+            $order->setVille($this->getUser()->getVille());
+            $order->setCodepostal($this->getUser()->getCodepostal());
+            $order->setAdresse($this->getUser()->getAdresse());
+            $order->setMail($this->getUser()->getEmail());
+            $order->setAccount($this->getUser()->getId());
+            $form = $this->createForm(ValidateCartConnected::class, $order);
+        } else {
+            $form = $this->createForm(ValidateCart::class, $order);
+        }
+
+        $orderInfo = "";
 
         // valider info
         foreach ($cart as $c) {
@@ -201,6 +233,8 @@ class CartController extends AbstractController
                 $this->addFlash('warning', 'Des produits ne sont plus disponible, attention');
                 $alert = 1;
             }
+            $product = $this->getProduct($c['id']);
+            $orderInfo = $orderInfo . " #" . $product->getId() . " " . $product->getDesignation() . "x" . $c['quantite']. " /";
         }
         if($alert == 1) {
             return $this->redirectToRoute('cart_show');
@@ -210,6 +244,7 @@ class CartController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
+            $order->setInfo($orderInfo);
 
             // gestion du stock
             foreach ($cart as $c) {
@@ -223,11 +258,54 @@ class CartController extends AbstractController
                 // redirect alerte plus de stock
             }
 
+            if($order->getAccount() == 1) {
+                if(!empty($repository->findOneBy(['email' => $order->getMail()]))) {
+                    if( $securityContext = $this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED') ) {
+                        if($this->getUser()->getEmail() != $order->getMail()) {
+                            $this->addFlash('warning', 'Différence entre l\'adresse mail de votre compte et celle utilisée');
+                            return $this->redirectToRoute('cart_show');
+                        }
+                    } else {
+                        $this->addFlash('warning', 'Compte existant, merci de vous connecter');
+                        return $this->redirectToRoute('app_login');
+                    }
+                }
+
+                // generer un mot de passe aléatoire + création de l'user
+                $password = $this->newPassword(4);
+                $user = new User();
+                $user
+                    ->setPassword($this->passwordEncoder->hashPassword($user,$password))
+                    ->setEmail($order->getMail())
+                    ->setAdresse($order->getAdresse())
+                    ->setCodepostal($order->getCodepostal())
+                    ->setVille($order->getVille())
+                    ->setNom($order->getNom())
+                    ->setPrenom($order->getPrenom())
+                    ->setTel($order->getTel());
+
+                // envoyer les données vers la creation de compte
+
+                $this->newUser($user);
+
+                // envoyer son mot de passe par mail avec la création du compte
+
+                $this->sendAccountCreatedMail($mailer, $user, $password);
+
+            }
+
+            // envoyer un mail récap de la commande
+            $this->sendOrderMail($mailer, $session->get('panier'), $order );
+
+            //suppresion du panier
+            $session->set('panier', []);
+
             // envoi en BDD
             $em = $this->getDoctrine()->getManager();
             $em->persist($order);
             $em->flush();
 
+            $this->addFlash('success', 'Merci pour votre commande');
             return $this->redirectToRoute("cart_show");
         }
 
@@ -236,6 +314,45 @@ class CartController extends AbstractController
         return $this->render('order/order.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    public function newPassword(int $lenght) {
+        return bin2hex(openssl_random_pseudo_bytes($lenght));
+    }
+
+    public function newUser(User $user) {
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($user);
+        $entityManager->flush();
+    }
+
+    public function sendOrderMail(\Swift_Mailer $mailer, array $panier, Order $order)
+    {
+        $message = (new \Swift_Message('Votre commande est enregistré !'))
+            ->setFrom('commande@mobile-guy.com')
+            ->setTo($order->getMail())
+            ->setBody( $this->renderView(
+                'email/order.html.twig',
+                ['panier' => $panier]
+            ),
+                'text/html'
+            )
+        ;
+
+        $mailer->send($message);
+    }
+
+    public function sendAccountCreatedMail(\Swift_Mailer $mailer, User $user, string $password)
+    {
+        $message = (new \Swift_Message('Votre compte vient d\'être créé !'))
+            ->setFrom('info@mobile-guy.com')
+            ->setTo($user->getEmail())
+            ->setBody(
+                'Voici votre mdp bg'.$password
+            )
+        ;
+
+        $mailer->send($message);
     }
 
 }
