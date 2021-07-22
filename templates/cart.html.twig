@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success">
+    {% for message in app.flashes('warning') %}
+        <div class="alert alert-danger">
             {{ message }}
         </div>
     {% endfor %}
@@ -27,6 +27,8 @@
                 <td><a href="{{ path('cart_delete', {'id' : index}) }}">Supprimer</a> </td>
             </tr>
             {% endfor %}
+
+            <p>Total : {{ total }}</p>
 
             <a href="{{ path('cart_trash') }}">Vider le panier</a>
         </table>

@@ -35,12 +35,14 @@ class CartController extends AbstractController
             $this->createCart($request);
             $cart = $session->get('panier');
         }
-
+        $price = 0;
         foreach ($cart as &$item) {
             $repository = $this->getDoctrine()->getRepository(Product::class);
             $productFind = $repository->find($item['id']);
 
             $item['product'] = $productFind;
+
+            $price = $price + $productFind->getPrice() * $item['quantite'];
         }
 
         $emptyCart = 0;
@@ -50,7 +52,8 @@ class CartController extends AbstractController
 
         return $this->render('cart.html.twig', [
             'emptyCart' => $emptyCart,
-            'cart' => $cart
+            'cart' => $cart,
+            'total' => $price
         ]);
     }
 
@@ -140,6 +143,35 @@ class CartController extends AbstractController
         return 1;
     }
 
+    public function verifStock(int $id, Request $request)
+    {
+        $repository = $this->getDoctrine()->getRepository(Product::class);
+        $product = $repository->find($id);
+
+        if($product->getStock() == 0) {
+            $this->delete($id, $request);
+            return 1;
+        }
+        return 0;
+
+    }
+
+    public function updateStock(int $id, int $quantite, Request $request)
+    {
+        $repository = $this->getDoctrine()->getRepository(Product::class);
+        $product = $repository->find($id);
+
+        if($product->getStock() != 0) {
+            $product->setStock($product->getStock() - $quantite);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($product);
+            $em->flush();
+            return 1;
+        }
+        return 0;
+
+    }
+
     /**
      * @Route("/cart/validation", name="cart_validation")
      * @param Request $request
@@ -147,6 +179,7 @@ class CartController extends AbstractController
      */
     public function cartValidator(Request $request): Response
     {
+        $alert = 0;
         // récup panier
         $session = $request->getSession();
         $cart = $session->get('panier');
@@ -162,17 +195,41 @@ class CartController extends AbstractController
 
         $form = $this->createForm(ValidateCart::class, $order);
 
+        // valider info
+        foreach ($cart as $c) {
+            if($this->verifStock($c['id'], $request) == 1) {
+                $this->addFlash('warning', 'Des produits ne sont plus disponible, attention');
+                $alert = 1;
+            }
+        }
+        if($alert == 1) {
+            return $this->redirectToRoute('cart_show');
+            // redirect alerte plus de stock
+        }
+
+        $form->handleRequest($request);
+
         if($form->isSubmitted() && $form->isValid()) {
+
+            // gestion du stock
+            foreach ($cart as $c) {
+                if($this->updateStock($c['id'], $c['quantite'] , $request) == 0) {
+                    $this->addFlash('warning', 'Erreur lors de la mise à jours du stock');
+                    $alert = 1;
+                }
+            }
+            if($alert == 1) {
+                return $this->redirectToRoute('cart_show');
+                // redirect alerte plus de stock
+            }
+
+            // envoi en BDD
             $em = $this->getDoctrine()->getManager();
             $em->persist($order);
             $em->flush();
 
-            return $this->redirectToRoute("public_home");
+            return $this->redirectToRoute("cart_show");
         }
-
-
-        // valider info
-        // Envoi BDD + gestion du stock
 
         // Envoi d'un email de validation ?
 
