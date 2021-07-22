@@ -4,11 +4,15 @@
 
 
 {% block body %}
+
     <section class="banner_4">
     </section>
-
+    {% for message in app.flashes('warning') %}
+        <div class="alert alert-danger">
+        
     {% for message in app.flashes('success') %}
         <div class="alert alert-success">
+
             {{ message }}
         </div>
     {% endfor %}
@@ -33,6 +37,8 @@
                 <td><a href="{{ path('cart_delete', {'id' : index}) }}">Supprimer</a> </td>
             </tr>
             {% endfor %}
+
+            <p>Total : {{ total }}</p>
 
             <a href="{{ path('cart_trash') }}">Vider le panier</a>
         </table>
