@@ -29,10 +29,12 @@
             <tr>
                 <td>{{ product.product.designation }}</td>
                 <td>{{ product.quantite }}</td>
-                <td>{{ product.product.price |format_currency('EUR') }}</td>
+                <td>{{ product.product.price }}</td>
                 <td><a href="{{ path('cart_delete', {'id' : index}) }}">Supprimer</a> </td>
             </tr>
             {% endfor %}
+
+            <p>Total : {{ total }}</p>
 
             <a href="{{ path('cart_trash') }}">Vider le panier</a>
         </table>
