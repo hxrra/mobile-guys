@@ -42,6 +42,13 @@
   background-repeat: no-repeat;
 }
 
+.banner_6 {
+  height: 250px;
+  background-image: url("/img/banner_6.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 
 @media (min-width: 768px) {
   .banner_1 {
@@ -64,5 +71,8 @@
     height: 300px;
   }
 
+  .banner_6 {
+    height: 300px;
+  }
 }
 

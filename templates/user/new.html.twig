@@ -3,9 +3,16 @@
 {% block title %}New User{% endblock %}
 
 {% block body %}
-    <h1>Create new User</h1>
 
-    {{ include('user/_form.html.twig') }}
+    <section class="banner_6">
+    </section>
 
-    <a href="{{ path('account_dashboard') }}">back to list</a>
+    <h1 class="text-center m-t-30 m-b-30">Inscription</h1>
+
+    <div class="container">
+        {{ include('user/_form.html.twig') }}
+    </div>
+
+
+
 {% endblock %}

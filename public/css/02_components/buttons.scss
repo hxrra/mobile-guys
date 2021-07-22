@@ -1,5 +1,4 @@
 .btn-guys {
-  width: 90%;
   font-family: "Secular One";
   font-size: 14px;
   text-align: center;
@@ -13,4 +12,26 @@
     color: white;
     background-color: #C36033;
   }
+}
+
+
+.btn-light-guys {
+  font-family: "Secular One";
+  font-size: 14px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #4C2529;
+  background-color: white;
+  border: #4C2529 1px solid;
+  border-radius: 0;
+  margin: 0 auto;
+
+  &:hover {
+    color: #C36033;
+    background-color: white;
+  }
+}
+
+.alert-danger {
+  background-color: none;
 }

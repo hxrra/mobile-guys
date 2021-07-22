@@ -19,10 +19,6 @@ h2 {
   color: #4C2529;
   text-transform: uppercase;
   padding: 10px;
-
-  &:hover {
-    color: #C36033;
-  }
 }
 
 .H2_underline {
@@ -82,5 +78,11 @@ hr {
   font-family: "Secular One";
   font-size: 50px;
   text-align: center;
+  color: #4C2529;
+}
+
+.hr_light {
+  opacity: 100% !important;
+  height: 1px !important;
   color: #4C2529;
 }
