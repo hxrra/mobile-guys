@@ -58,6 +58,11 @@ class Order
      */
     private $account;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $info;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -155,6 +160,18 @@ class Order
     public function setAccount(int $account): self
     {
         $this->account = $account;
+
+        return $this;
+    }
+
+    public function getInfo(): ?string
+    {
+        return $this->info;
+    }
+
+    public function setInfo(string $info): self
+    {
+        $this->info = $info;
 
         return $this;
     }
