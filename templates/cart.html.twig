@@ -4,8 +4,11 @@
 
 
 {% block body %}
+
     <section class="banner_4">
     </section>
+    {% for message in app.flashes('warning') %}
+        <div class="alert alert-danger">
 
     {% for message in app.flashes('success') %}
         <div class="alert alert-success">
@@ -36,6 +39,10 @@
                     </tr>
                     {% endfor %}
 
+            <p>Total : {{ total }}</p>
+
+            <a href="{{ path('cart_trash') }}">Vider le panier</a>
+        </table>
                     <a href="{{ path('cart_trash') }}">Vider le panier</a>
                 </table>
 
