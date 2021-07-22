@@ -79,9 +79,6 @@ h2 {
   text-transform: uppercase;
   padding: 10px;
 }
-h2:hover {
-  color: #C36033;
-}
 
 .H2_underline {
   opacity: 100% !important;
@@ -136,6 +133,12 @@ hr {
   font-family: "Secular One";
   font-size: 50px;
   text-align: center;
+  color: #4C2529;
+}
+
+.hr_light {
+  opacity: 100% !important;
+  height: 1px !important;
   color: #4C2529;
 }
 
@@ -2703,7 +2706,6 @@ hr {
   }
 }
 .btn-guys {
-  width: 90%;
   font-family: "Secular One";
   font-size: 14px;
   text-align: center;
@@ -2716,6 +2718,22 @@ hr {
 .btn-guys:hover {
   color: white;
   background-color: #C36033;
+}
+
+.btn-light-guys {
+  font-family: "Secular One";
+  font-size: 14px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #4C2529;
+  background-color: white;
+  border: #4C2529 1px solid;
+  border-radius: 0;
+  margin: 0 auto;
+}
+.btn-light-guys:hover {
+  color: #C36033;
+  background-color: white;
 }
 
 .banner_1 {
@@ -2779,6 +2797,17 @@ hr {
     height: 300px;
   }
 }
+input {
+  background-color: white !important;
+  border-radius: 0 !important;
+  border: #4C2529 1px solid !important;
+}
+
+label {
+  font-size: 14px;
+  color: #4C2529;
+}
+
 body {
   font-family: "Roboto Light";
   background-color: #FCF6EE;
@@ -2807,6 +2836,20 @@ footer {
   height: 10px;
   border-radius: 5px;
   background-color: #C36033;
+}
+
+.cart {
+  min-height: 50vh;
+}
+
+.cart_product-img img {
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .cart {
+    min-height: 40vh;
+  }
 }
 
 /*# sourceMappingURL=styles.css.map */

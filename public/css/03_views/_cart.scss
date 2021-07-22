@@ -1,0 +1,15 @@
+.cart {
+  min-height: 50vh;
+}
+
+
+.cart_product-img img{
+  max-width: 100%;
+}
+
+
+@media (min-width: 768px) {
+  .cart{
+    min-height: 40vh;
+  }
+}

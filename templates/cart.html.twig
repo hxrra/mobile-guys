@@ -17,40 +17,54 @@
         </div>
     {% endfor %}
     
-    <section class="container-fluid">
+    <section class="cart container-fluid">
         <h2 class="text-center m-t-30 m-b-30">Votre panier</h2>
 
         <div class="d-flex flex-wrap m-t-30 m-b-30">
-            <div class="col-4"><p class="title">Produit</p></div>
-            <div class="col-4"><p class="title">Quantité</p> </div>
-            <div class="col-4"><p class="title">Prix</p></div>
+            <div class="col-4 col-md-8"><p class="title">Produit</p></div>
+            <div class="col-4 col-md-2"><p class="title">Quantité</p> </div>
+            <div class="col-4 col-md-2"><p class="title text-center text-md-start">Prix</p></div>
             <hr class="col-12">
         </div>
             {% if emptyCart == 1 %}
-                <p>Votre panier est vide !!!</p>
+                <p class="m-t-30 m-b-30 text-center">Votre panier est vide !!!</p>
             {% else %}
 
                     {% for index,product in cart %}
-                    <div class="d-flex flex-wrap">
-                        <div class="col-6">
-                            <div class="w-100">
+                    <div class="d-flex flex-wrap cart_product">
+                        <div class="col-8 d-flex flex-wrap">
+                            <div class="col-6 cart_product-img">
                                 <img class="p-x-15 p-y-15" src="/img/{{ product.product.image }}" alt="{{ product.product.designation }}">
                             </div>
-                            {{ product.product.designation }}
-                            <p>{{ product.product.description|length > 40 ? product.product.description|slice(0, 40) ~ '...' : product.product.description  }}</p>
-                            <a href="{{ path('cart_delete', {'id' : index}) }}">Supprimer</a>
+                            <div class="col-6">
+                                <p class="title"> {{ product.product.designation }}</p>
+                            <p class="subtitle">{{ product.product.description|length > 40 ? product.product.description|slice(0, 40) ~ '...' : product.product.description  }}</p>
+                            <a class="link-guy" href="{{ path('cart_delete', {'id' : index}) }}">Supprimer</a>
+                            </div>
                         </div>
-                        <div class="col-3">{{ product.quantite }}</div>
-                        <div class="col-3">{{ product.product.price |format_currency('EUR') }}</div>
-
+                        <div class="col-2 text-center">{{ product.quantite }}</div>
+                        <div class="col-2 text-center">{{ product.product.price |format_currency('EUR') }}</div>
+                        {% if not loop.last  %}
+                        <hr class="col-12 hr_light">
+                        {% endif %}
                     </div>
                     {% endfor %}
-                    
-            <p>Total : {{ total }}</p>
+            <div class="m-t-30 m-b-30">
+                <hr class="col-12">
 
-                    <a href="{{ path('cart_trash') }}">Vider le panier</a>
+                <p class="text-end title fs-4">Total : {{ total |format_currency('EUR') }}</p>
 
-                <a href="{{ path('cart_validation') }}">Valider le panier</a>
+                <hr class="col-12">
+
+                <div class="col-12 d-flex flex-wrap justify-content-between m-t-30 m-b-30">
+                 <a class="btn btn-light-guys col-5" href="{{ path('cart_trash') }}">Vider le panier</a>
+
+                <a class="btn btn-guys col-5" href="{{ path('cart_validation') }}">Valider le panier</a>
+
+                </div>
+
+
+           </div>
             {% endif %}
     </section>
 {% endblock %}
