@@ -9,6 +9,7 @@
     </section>
     {% for message in app.flashes('warning') %}
         <div class="alert alert-danger">
+    {% endfor %}
 
     {% for message in app.flashes('success') %}
         <div class="alert alert-success">
@@ -17,34 +18,37 @@
     {% endfor %}
 
     <section class="container-fluid">
-        <h2>Affichage du panier</h2>
+        <h2 class="text-center m-t-30 m-b-30">Votre panier</h2>
 
+        <div class="d-flex flex-wrap m-t-30 m-b-30">
+            <div class="col-4"><p class="title">Produit</p></div>
+            <div class="col-4"><p class="title">Quantité</p> </div>
+            <div class="col-4"><p class="title">Prix</p></div>
+            <hr class="col-12">
+        </div>
             {% if emptyCart == 1 %}
                 <p>Votre panier est vide !!!</p>
             {% else %}
-                <table>
-                    <tr>
-                        <th>Nom</th>
-                        <th>Quantité</th>
-                        <th>Prix</th>
-                        <th>Action</th>
-                    </tr>
+
                     {% for index,product in cart %}
-                        {{ dump(product) }}
-                    <tr>
-                        <td>{{ product.product.designation }}</td>
-                        <td>{{ product.quantite }}</td>
-                        <td>{{ product.product.price |format_currency('EUR') }}</td>
-                        <td><a href="{{ path('cart_delete', {'id' : index}) }}">Supprimer</a> </td>
-                    </tr>
+                    <div class="d-flex flex-wrap">
+                        <div class="col-6">
+                            <div class="w-100">
+                                <img class="p-x-15 p-y-15" src="/img/{{ product.product.image }}" alt="{{ product.product.designation }}">
+                            </div>
+                            {{ product.product.designation }}
+                            <p>{{ product.product.description|length > 40 ? product.product.description|slice(0, 40) ~ '...' : product.product.description  }}</p>
+                            <a href="{{ path('cart_delete', {'id' : index}) }}">Supprimer</a>
+                        </div>
+                        <div class="col-3">{{ product.quantite }}</div>
+                        <div class="col-3">{{ product.product.price |format_currency('EUR') }}</div>
+
+                    </div>
                     {% endfor %}
 
             <p>Total : {{ total }}</p>
 
-            <a href="{{ path('cart_trash') }}">Vider le panier</a>
-        </table>
                     <a href="{{ path('cart_trash') }}">Vider le panier</a>
-                </table>
 
                 <a href="{{ path('cart_validation') }}">Valider le panier</a>
             {% endif %}

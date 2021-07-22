@@ -7,6 +7,10 @@
 }
 .navbar a {
   color: #4C2529;
+
+  &:hover {
+    color: #C36033;
+  }
 }
 
 .navbar-toggler-icon {

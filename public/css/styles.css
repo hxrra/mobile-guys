@@ -79,6 +79,9 @@ h2 {
   text-transform: uppercase;
   padding: 10px;
 }
+h2:hover {
+  color: #C36033;
+}
 
 .H2_underline {
   opacity: 100% !important;
@@ -94,6 +97,12 @@ h2 {
 p {
   font-size: 12px;
   margin-bottom: 0;
+}
+
+hr {
+  opacity: 100% !important;
+  height: 5px !important;
+  color: #4C2529;
 }
 
 .title {
@@ -113,6 +122,9 @@ p {
   font-family: "Roboto Light";
   color: #4C2529;
   text-decoration: none;
+}
+.link-guy:hover {
+  color: #C36033;
 }
 
 .out_text {
@@ -2609,6 +2621,9 @@ p {
 
 .navbar a {
   color: #4C2529;
+}
+.navbar a:hover {
+  color: #C36033;
 }
 
 .navbar-toggler-icon {
