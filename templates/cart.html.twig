@@ -12,33 +12,34 @@
             {{ message }}
         </div>
     {% endfor %}
-<h2>Affichage du panier</h2>
 
-    {% if emptyCart == 1 %}
-        <p>Votre panier est vide !!!</p>
-    {% else %}
-        <table>
-            <tr>
-                <th>Nom</th>
-                <th>Quantité</th>
-                <th>Prix</th>
-                <th>Action</th>
-            </tr>
-            {% for index,product in cart %}
-                {{ dump(product) }}
-            <tr>
-                <td>{{ product.product.designation }}</td>
-                <td>{{ product.quantite }}</td>
-                <td>{{ product.product.price |format_currency('EUR') }}</td>
-                <td><a href="{{ path('cart_delete', {'id' : index}) }}">Supprimer</a> </td>
-            </tr>
-            {% endfor %}
+    <section class="container-fluid">
+        <h2>Affichage du panier</h2>
 
-            <a href="{{ path('cart_trash') }}">Vider le panier</a>
-        </table>
+            {% if emptyCart == 1 %}
+                <p>Votre panier est vide !!!</p>
+            {% else %}
+                <table>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Quantité</th>
+                        <th>Prix</th>
+                        <th>Action</th>
+                    </tr>
+                    {% for index,product in cart %}
+                        {{ dump(product) }}
+                    <tr>
+                        <td>{{ product.product.designation }}</td>
+                        <td>{{ product.quantite }}</td>
+                        <td>{{ product.product.price |format_currency('EUR') }}</td>
+                        <td><a href="{{ path('cart_delete', {'id' : index}) }}">Supprimer</a> </td>
+                    </tr>
+                    {% endfor %}
 
-        <a href="{{ path('cart_validation') }}">Valider le panier</a>
-    {% endif %}
+                    <a href="{{ path('cart_trash') }}">Vider le panier</a>
+                </table>
 
-    <a
+                <a href="{{ path('cart_validation') }}">Valider le panier</a>
+            {% endif %}
+    </section>
 {% endblock %}
