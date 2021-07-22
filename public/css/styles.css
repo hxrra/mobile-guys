@@ -2736,6 +2736,10 @@ hr {
   background-color: white;
 }
 
+.alert-danger {
+  background-color: none;
+}
+
 .banner_1 {
   height: 250px;
   background-image: url("/img/banner_1.jpg");
@@ -2776,6 +2780,14 @@ hr {
   background-repeat: no-repeat;
 }
 
+.banner_6 {
+  height: 250px;
+  background-image: url("/img/banner_6.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 @media (min-width: 768px) {
   .banner_1 {
     height: 300px;
@@ -2796,6 +2808,10 @@ hr {
   .banner_5 {
     height: 300px;
   }
+
+  .banner_6 {
+    height: 300px;
+  }
 }
 input {
   background-color: white !important;
@@ -2806,6 +2822,10 @@ input {
 label {
   font-size: 14px;
   color: #4C2529;
+}
+
+.form_new {
+  margin: auto;
 }
 
 body {

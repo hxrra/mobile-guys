@@ -4,12 +4,15 @@
 
 {% block body %}
 
-    <section class="">
-
+    <section class="banner_6">
     </section>
-        <h1 class="text-center">Inscription</h1>
 
-    {{ include('user/_form.html.twig') }}
+    <h1 class="text-center m-t-30 m-b-30">Inscription</h1>
 
-    <a href="{{ path('account_dashboard') }}">back to list</a>
+    <div class="container">
+        {{ include('user/_form.html.twig') }}
+    </div>
+
+
+
 {% endblock %}
